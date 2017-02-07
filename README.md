@@ -54,3 +54,4 @@ render() {
 | in   | animation fade in |
 | interval    | animation fade duration |
 | delay    | Time before the animation will show |
+| onFadeComplete    | `callback` when animation is complete |
