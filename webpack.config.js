@@ -16,7 +16,7 @@ module.exports = {
     .concat(Object.keys(pkg.dependencies)),
   module: {
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
     ]
   },
   plugins: [
