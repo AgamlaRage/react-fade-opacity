@@ -52,7 +52,7 @@ render() {
 
 | Property | Description                   |
 | -------- | ----------------------------- |
-| in   | animation fade in |
-| interval    | animation fade duration |
-| delay    | Time before the animation will show |
-| onFadeComplete    | `callback` when animation is complete |
+| in   | Set true to fade the animation in |
+| interval    | Animation fade duration in ms |
+| delay    | Time before the animation will show in ms |
+| onFadeComplete    | `callback` when animation completes |
