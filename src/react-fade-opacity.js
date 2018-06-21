@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -64,9 +65,11 @@ class Fade extends React.Component {
   }
 
   static propTypes = {
-    in: React.PropTypes.bool,
-    interval: React.PropTypes.number,
-    delay: React.PropTypes.number
+    in: PropTypes.bool,
+    interval: PropTypes.number,
+    delay: PropTypes.number,
+    chidlren: PropTypes.node,
+    onFadeComplete: PropTypes.func
   }
   static defaultProps = {
     in: false,
