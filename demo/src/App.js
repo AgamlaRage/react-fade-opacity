@@ -30,6 +30,10 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    document.title = "React-Fade-Opacity";
+  }
+
   render() {
 
     return (
@@ -38,7 +42,7 @@ class App extends React.Component {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <div className="jumbotron">
           <div className="container">
-            <h1>React-fade-opacity</h1>
+            <h1>React-Fade-Opacity</h1>
             <p>React.js fade out/in opacity effect</p>
             <h3>
               <a href="https://github.com/AgamlaRage/react-fade-opacity" target="_blank">Github</a>
