@@ -18,12 +18,15 @@
     "design",
     "material"
   ],
+  "dependencies": {
+    "prop-types": "15.6.2",
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AgamlaRage/react-fade-opacity/issues"
   },
   "peerDependencies": {
-    "react": "0.12.*"
+    "react": "^15.6.2 || ^16.0"
   },
   "files": [
     "dist/",
