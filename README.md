@@ -38,9 +38,10 @@ render() {
 
 ```javascript
   static propTypes = {
-    in: React.PropTypes.bool,
-    interval: React.PropTypes.number,
-    delay: React.PropTypes.number
+    in: PropTypes.bool,
+    interval: PropTypes.number,
+    delay: PropTypes.number,
+    children: PropTypes.node
   }
   static defaultProps = {
     in: false,
