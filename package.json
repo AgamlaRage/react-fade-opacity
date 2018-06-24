@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --config demo/webpack.config.js --hot --inline"
+    "build_docs": "webpack --config webpack.config.docs.js",
+    "start": "webpack-dev-server --config webpack.config.docs.js --hot --inline"
   },
   "keywords": [
     "react",
