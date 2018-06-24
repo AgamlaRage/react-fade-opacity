@@ -1,5 +1,6 @@
 # files
 npm-debug.log
+.brackets.json
 
 # dir
 node_modules/
