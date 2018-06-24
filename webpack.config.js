@@ -12,8 +12,7 @@ module.exports = {
     filename: '[name].js',
     libraryTarget: 'umd'
   },
-  externals: []
-    .concat(Object.keys(pkg.dependencies)),
+  externals: [].concat(Object.keys(pkg.dependencies)),
   module: {
     loaders: [
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
