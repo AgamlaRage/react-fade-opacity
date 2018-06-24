@@ -80,11 +80,6 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.sleep = undefined;
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -103,7 +98,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var sleep = exports.sleep = function sleep(ms) {
+var sleep = function sleep(ms) {
   return new Promise(function (resolve) {
     return setTimeout(resolve, ms);
   });
@@ -115,71 +110,87 @@ var Fade = function (_React$Component) {
   function Fade(props) {
     _classCallCheck(this, Fade);
 
-    var _this2 = _possibleConstructorReturn(this, (Fade.__proto__ || Object.getPrototypeOf(Fade)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Fade.__proto__ || Object.getPrototypeOf(Fade)).call(this, props));
 
-    _this2.state = {
-      opacity: _this2.props.in ? 0 : 1
+    _this.state = {
+      opacity: _this.props.in ? 0 : 1
     };
 
-    _this2.fade = function () {
-      var _this = _this2;
-      var op = _this2.state.opacity;
+    _this.fade = function () {
+      var opacity = _this.state.opacity;
+      var _this$props = _this.props,
+          interval = _this$props.interval,
+          onFadeComplete = _this$props.onFadeComplete;
+
+
       var timer = setInterval(function () {
-        if (op <= 0.1) {
+        if (opacity <= 0.1) {
           _this.setState({ opacity: 0 });
           clearInterval(timer);
-          if (typeof props.onFadeComplete === 'function') {
-            props.onFadeComplete(); // custom callback
+          if (onFadeComplete) {
+            // custom callback
+            onFadeComplete();
           }
         } else {
-          op -= op * 0.1;
-          _this.setState({ opacity: op });
+          opacity -= opacity * 0.1;
+          _this.setState({ opacity: opacity });
         }
-      }, _this2.props.interval);
+      }, interval);
     };
-    _this2.unfade = function () {
-      var _this = _this2;
-      var op = _this2.state.opacity;
+
+    _this.unfade = function () {
+      var opacity = _this.state.opacity;
+      var _this$props2 = _this.props,
+          interval = _this$props2.interval,
+          onFadeComplete = _this$props2.onFadeComplete;
+
+
       var timer = setInterval(function () {
-        if (op >= 1) {
+        if (opacity >= 1) {
           _this.setState({ opacity: 1 });
           clearInterval(timer);
-          if (typeof props.onFadeComplete === 'function') {
-            props.onFadeComplete(); // custom callback
+          if (onFadeComplete) {
+            // custom callback
+            onFadeComplete();
           }
         } else {
-          if (op === 0) {
-            op = 0.1;
+          if (opacity === 0) {
+            opacity = 0.1;
           }
-          op += op * 0.1;
-          _this.setState({ opacity: op });
+          opacity += opacity * 0.1;
+          _this.setState({ opacity: opacity });
         }
-      }, _this2.props.interval);
+      }, interval);
     };
-    return _this2;
+    return _this;
   }
 
   _createClass(Fade, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this3 = this;
+      var _this2 = this;
 
-      sleep(this.props.delay).then(function () {
+      var delay = this.props.delay;
+
+
+      sleep(delay).then(function () {
         // wait the delay before starting animation
-        if (_this3.props.in) {
-          _this3.unfade();
+        if (_this2.props.in) {
+          _this2.unfade();
         } else {
-          _this3.fade();
+          _this2.fade();
         }
       });
     }
   }, {
     key: 'render',
     value: function render() {
+      var opacity = this.state.opacity;
       var children = this.props.children;
 
+
       return _react2.default.cloneElement(children, {
-        style: { opacity: this.state.opacity }
+        style: { opacity: opacity }
       });
     }
   }]);
@@ -194,12 +205,12 @@ Fade.propTypes = {
   chidlren: _propTypes2.default.node,
   onFadeComplete: _propTypes2.default.func
 };
+
 Fade.defaultProps = {
   in: false,
   interval: 50,
   delay: 6000
 };
-
 
 module.exports = Fade;
 
