@@ -1,3 +1,7 @@
+# files
 npm-debug.log
-node_modules
-build
+.brackets.json
+
+# dir
+node_modules/
+dist/

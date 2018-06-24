@@ -38,9 +38,10 @@ render() {
 
 ```javascript
   static propTypes = {
-    in: React.PropTypes.bool,
-    interval: React.PropTypes.number,
-    delay: React.PropTypes.number
+    in: PropTypes.bool,
+    interval: PropTypes.number,
+    delay: PropTypes.number,
+    children: PropTypes.node
   }
   static defaultProps = {
     in: false,
@@ -51,7 +52,7 @@ render() {
 
 | Property | Description                   |
 | -------- | ----------------------------- |
-| in   | animation fade in |
-| interval    | animation fade duration |
-| delay    | Time before the animation will show |
-| onFadeComplete    | `callback` when animation is complete |
+| in   | Set true to fade the animation in |
+| interval    | Animation fade duration in ms |
+| delay    | Time before the animation will show in ms |
+| onFadeComplete    | `callback` when animation completes |
