@@ -11,7 +11,8 @@ class App extends React.Component {
       in: true,
       interval: 50,
       delay: 500,
-      fadeCompleteMessage: 'Fade Complete Message'
+      fadeCompleteMessage: 'Fade Complete Message',
+      mounted: true
     };
 
     this.runAnimation = () => {
@@ -31,6 +32,13 @@ class App extends React.Component {
       alert(`onFadeComplete: ${this.state.fadeCompleteMessage}`);
       this.setState({ run: false }); // destroy element
     };
+  }
+
+  handleToggleMount = () => {
+    console.log("aaa")
+    this.setState({
+      mounted: !this.state.mounted
+    })
   }
 
   render() {
@@ -58,6 +66,7 @@ class App extends React.Component {
               <div className="border p-3">
 
                 <h3>Props</h3>
+                <button onClick={this.handleToggleMount}>{this.state.mounted ? 'Unmount' : 'Mount'}</button>
                 <form>
 
                   <div className="form-group row">
@@ -91,7 +100,7 @@ class App extends React.Component {
               </div>
             </div>
 
-            {run &&
+            {run && this.state.mounted &&
               <Fade {...this.state} onFadeComplete={this.onFadeComplete}>
                 <div className="col-sm-6">
                   <div className="border p-3">
