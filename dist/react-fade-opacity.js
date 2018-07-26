@@ -112,6 +112,8 @@ var Fade = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Fade.__proto__ || Object.getPrototypeOf(Fade)).call(this, props));
 
+    _this.timer = undefined;
+
     _this.state = {
       opacity: _this.props.in ? 0 : 1
     };
@@ -123,10 +125,10 @@ var Fade = function (_React$Component) {
           onFadeComplete = _this$props.onFadeComplete;
 
 
-      var timer = setInterval(function () {
+      _this.timer = setInterval(function () {
         if (opacity <= 0.1) {
           _this.setState({ opacity: 0 });
-          clearInterval(timer);
+          clearInterval(_this.timer);
           if (onFadeComplete) {
             // custom callback
             onFadeComplete();
@@ -145,10 +147,10 @@ var Fade = function (_React$Component) {
           onFadeComplete = _this$props2.onFadeComplete;
 
 
-      var timer = setInterval(function () {
+      _this.timer = setInterval(function () {
         if (opacity >= 1) {
           _this.setState({ opacity: 1 });
-          clearInterval(timer);
+          clearInterval(_this.timer);
           if (onFadeComplete) {
             // custom callback
             onFadeComplete();
@@ -166,6 +168,11 @@ var Fade = function (_React$Component) {
   }
 
   _createClass(Fade, [{
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearInterval(this.timer);
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;

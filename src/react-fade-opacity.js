@@ -4,10 +4,10 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 
 class Fade extends React.Component {
+  timer = undefined;
 
   constructor(props) {
     super(props)
-
     this.state = {
       opacity: this.props.in ? 0 : 1
     }
@@ -16,16 +16,16 @@ class Fade extends React.Component {
       let { opacity } = this.state
       const { interval, onFadeComplete } = this.props
 
-      var timer = setInterval(() => {
+      this.timer = setInterval(() => {
         if (opacity <= 0.1) {
-          this.setState({opacity: 0})
-          clearInterval(timer)
+          this.setState({ opacity: 0 })
+          clearInterval(this.timer)
           if (onFadeComplete) { // custom callback
             onFadeComplete()
           }
         } else {
           opacity -= opacity * 0.1
-          this.setState({opacity})
+          this.setState({ opacity })
         }
       }, interval)
     }
@@ -34,10 +34,10 @@ class Fade extends React.Component {
       let { opacity } = this.state
       const { interval, onFadeComplete } = this.props
 
-      var timer = setInterval(() => {
+      this.timer = setInterval(() => {
         if (opacity >= 1) {
-          this.setState({opacity: 1})
-          clearInterval(timer)
+          this.setState({ opacity: 1 })
+          clearInterval(this.timer)
           if (onFadeComplete) { // custom callback
             onFadeComplete()
           }
@@ -46,11 +46,16 @@ class Fade extends React.Component {
             opacity = 0.1
           }
           opacity += opacity * 0.1
-          this.setState({opacity})
+          this.setState({ opacity })
         }
       }, interval)
     }
   }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
   componentDidMount() {
     const { delay } = this.props
 
@@ -68,7 +73,7 @@ class Fade extends React.Component {
     const { children } = this.props
 
     return React.cloneElement(children, {
-      style: {opacity}
+      style: { opacity }
     })
   }
 }
