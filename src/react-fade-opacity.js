@@ -62,6 +62,10 @@ class Fade extends React.Component {
       }
     })
   }
+  
+  componentWillUnmount() {
+		clearTimeout(sleep);
+	}
 
   render() {
     const { opacity } = this.state
@@ -77,14 +81,14 @@ Fade.propTypes = {
   in: PropTypes.bool,
   interval: PropTypes.number,
   delay: PropTypes.number,
-  chidlren: PropTypes.node,
+  children: PropTypes.node,
   onFadeComplete: PropTypes.func
 }
 
 Fade.defaultProps = {
   in: false,
-  interval: 50,
-  delay: 6000
+	interval: 0,
+	delay: 0
 }
 
 module.exports = Fade
